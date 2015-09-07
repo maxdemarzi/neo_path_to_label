@@ -17,21 +17,21 @@ public class PathToLabelTest {
 
     @Test
     public void shouldFindFirstLabel() {
-        HTTP.Response response = HTTP.GET(neo4j.httpURI().resolve("/v1/service/path_to/One/from/1").toString());
+        HTTP.Response response = HTTP.GET(neo4j.httpURI().resolve("/v1/service/path_to/One/from/0").toString());
         HashMap actual = response.content();
         assertEquals(ONE_MAP, actual);
     }
 
     @Test
     public void shouldFindSecondLabel() {
-        HTTP.Response response = HTTP.GET(neo4j.httpURI().resolve("/v1/service/path_to/Two/from/1").toString());
+        HTTP.Response response = HTTP.GET(neo4j.httpURI().resolve("/v1/service/path_to/Two/from/0").toString());
         HashMap actual = response.content();
         assertEquals(TWO_MAP, actual);
     }
 
     @Test
     public void shouldFindThreeLabel() {
-        HTTP.Response response = HTTP.GET(neo4j.httpURI().resolve("/v1/service/path_to/Three/from/1").toString());
+        HTTP.Response response = HTTP.GET(neo4j.httpURI().resolve("/v1/service/path_to/Three/from/0").toString());
         HashMap actual = response.content();
         assertEquals(THREE_MAP, actual);
     }
@@ -56,7 +56,7 @@ public class PathToLabelTest {
     }};
 
     static HashMap<String, Object> TWO_MAP = new HashMap<String, Object>(){{
-        put("name", "2.0");
+        put("name", "2.1");
     }};
 
     static HashMap<String, Object> THREE_MAP = new HashMap<String, Object>(){{
