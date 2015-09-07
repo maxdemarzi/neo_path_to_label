@@ -52,6 +52,7 @@ public class Service {
                 for (String property : found.getPropertyKeys()) {
                     results.put(property, found.getProperty(property));
                 }
+                break;
             }
 
         }

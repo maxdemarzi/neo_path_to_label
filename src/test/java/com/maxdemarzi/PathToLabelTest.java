@@ -45,7 +45,7 @@ public class PathToLabelTest {
                     .append("CREATE (three:Three {name:'3.0'})")
                     .append("CREATE (start)-[:CONNECTS]->(one)")
                     .append("CREATE (one)-[:CONNECTS]->(two)")
-                    .append("CREATE (one)-[:CONNECTS]->(twotoo)")
+                    .append("CREATE (start)-[:CONNECTS]->(twotoo)")
                     .append("CREATE (one)-[:CONNECTS]->(three)")
                     .append("CREATE (two)-[:CONNECTS]->(three)")
                     .append("CREATE (twotoo)-[:CONNECTS]->(three)")
