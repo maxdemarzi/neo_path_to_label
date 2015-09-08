@@ -5,9 +5,8 @@ import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 import org.neo4j.graphdb.traversal.Uniqueness;
 
-import javax.ws.rs.GET;
+import javax.ws.rs.*;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -32,11 +31,20 @@ public class Service {
     @Path("/path_to/{label}/from/{id}")
     public Response pathToLabel(@PathParam("label") String label,
                                 @PathParam("id") Long id,
+                                @DefaultValue("both") @QueryParam("direction") String dir,
                                 @Context GraphDatabaseService db) throws IOException {
         HashMap<String, Object> results = new HashMap<String,Object>();
+        Direction direction;
+        if (dir.toLowerCase().equals("incoming")) {
+            direction = Direction.INCOMING;
+        } else if (dir.toLowerCase().equals("outgoing")) {
+            direction = Direction.OUTGOING;
+        } else {
+            direction = Direction.BOTH;
+        }
 
         LabelEvaluator labelEvaluator = new LabelEvaluator(DynamicLabel.label(label));
-        PathExpander pathExpander = PathExpanderBuilder.allTypesAndDirections().build();
+        PathExpander pathExpander = PathExpanderBuilder.allTypes(direction).build();
 
         TraversalDescription td = db.traversalDescription()
                 .breadthFirst()
@@ -52,6 +60,7 @@ public class Service {
                 for (String property : found.getPropertyKeys()) {
                     results.put(property, found.getProperty(property));
                 }
+                results.put("id", found.getId());
                 break;
             }
 

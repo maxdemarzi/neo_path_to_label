@@ -24,4 +24,7 @@ Example Traversal API finding the first shortest path to a node with a specific 
 6. Try the extension:
         
         :GET /v1/service/path_to/{Label}/from/{node_id}"
+        :GET /v1/service/path_to/{Label}/from/{node_id}?direction=incoming"
+        :GET /v1/service/path_to/{Label}/from/{node_id}?direction=outgoing"
+        
         
