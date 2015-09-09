@@ -60,7 +60,7 @@ public class Service {
                 for (String property : found.getPropertyKeys()) {
                     results.put(property, found.getProperty(property));
                 }
-                results.put("id", found.getId());
+                results.put("neo4j_node_id", found.getId());
                 break;
             }
 
