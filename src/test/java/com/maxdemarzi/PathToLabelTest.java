@@ -65,22 +65,22 @@ public class PathToLabelTest {
 
     static HashMap<String, Object> ONE_MAP = new HashMap<String, Object>(){{
         put("name", "1");
-        put("id", 1);
+        put("neo4j_node_id", 1);
     }};
 
     static HashMap<String, Object> TWO_MAP = new HashMap<String, Object>(){{
         put("name", "2.1");
-        put("id", 3);
+        put("neo4j_node_id", 3);
     }};
 
     static HashMap<String, Object> THREE_MAP = new HashMap<String, Object>(){{
         put("name", "3.0");
-        put("id", 4);
+        put("neo4j_node_id", 4);
     }};
 
     static HashMap<String, Object> FOUR_MAP = new HashMap<String, Object>(){{
         put("name", "4.0");
-        put("id", 5);
+        put("neo4j_node_id", 5);
     }};
 
     static HashMap<String, Object> EMPTY_MAP = new HashMap<String, Object>();
