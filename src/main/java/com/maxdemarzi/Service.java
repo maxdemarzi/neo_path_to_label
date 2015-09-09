@@ -2,6 +2,7 @@ package com.maxdemarzi;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 import org.neo4j.graphdb.traversal.Uniqueness;
 
@@ -32,6 +33,7 @@ public class Service {
     public Response pathToLabel(@PathParam("label") String label,
                                 @PathParam("id") Long id,
                                 @DefaultValue("both") @QueryParam("direction") String dir,
+                                @DefaultValue("20") @QueryParam("depth") Integer depth,
                                 @Context GraphDatabaseService db) throws IOException {
         HashMap<String, Object> results = new HashMap<String,Object>();
         Direction direction;
@@ -49,8 +51,9 @@ public class Service {
         TraversalDescription td = db.traversalDescription()
                 .breadthFirst()
                 .evaluator(labelEvaluator)
+                .evaluator(Evaluators.toDepth(depth))
                 .expand(pathExpander)
-                .uniqueness(Uniqueness.RELATIONSHIP_PATH);
+                .uniqueness(Uniqueness.NODE_GLOBAL);
 
         try (Transaction tx = db.beginTx()) {
             Node start = db.getNodeById(id);
